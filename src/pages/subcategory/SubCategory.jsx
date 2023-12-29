@@ -5,11 +5,13 @@ import { subcategory_columns } from "../../components/tables/TableHeader";
 import Table from "../../components/tables/Table";
 const SubCategory = () => {
   const [allSubCategory, setAllSubCategory] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
 
   const getSubCategory = async () => {
     const response = await MasterServices.getAllSubCategory();
-    if (response.data.data.length > 0) {
+    if (response?.data) {
       setAllSubCategory(response.data.data);
+      setImageUrl(response?.data?.path);
     } else {
       toast.error(response?.data?.message);
     }
@@ -30,7 +32,7 @@ const SubCategory = () => {
           </div>
           <div className="flex flex-col">
             <Table
-              columns={subcategory_columns({ onDeleteOpen })}
+              columns={subcategory_columns({ onDeleteOpen, imageUrl })}
               data={allSubCategory}
             />
           </div>

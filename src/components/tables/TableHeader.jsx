@@ -13,6 +13,10 @@ export const user_columns = ({ onDeleteOpen }) => [
     Header: "Email",
     accessor: "email",
   },
+  // {
+  //   Header: "Avatar",
+  //   accessor: "avatar",
+  // },
   {
     Header: "Contact",
     accessor: "contact",
@@ -67,7 +71,7 @@ export const user_columns = ({ onDeleteOpen }) => [
   },
 ];
 
-export const category_columns = ({ onDeleteOpen }) => [
+export const category_columns = ({ onDeleteOpen, imageUrl }) => [
   {
     Header: "Name",
     accessor: "name",
@@ -75,6 +79,19 @@ export const category_columns = ({ onDeleteOpen }) => [
   {
     Header: "Image",
     accessor: "image",
+    Cell: (cell) => {
+      const image = cell.row.original.image;
+
+      return (
+        <>
+          <img
+            src={`${imageUrl}/${image}`}
+            alt="category image"
+            className="w-[50px] h-auto"
+          />
+        </>
+      );
+    },
   },
   {
     Header: "Action",
@@ -114,7 +131,7 @@ export const category_columns = ({ onDeleteOpen }) => [
   },
 ];
 
-export const subcategory_columns = ({ onDeleteOpen }) => [
+export const subcategory_columns = ({ onDeleteOpen, imageUrl }) => [
   {
     Header: "Name",
     accessor: "name",
@@ -126,6 +143,19 @@ export const subcategory_columns = ({ onDeleteOpen }) => [
   {
     Header: "Image",
     accessor: "image",
+    Cell: (cell) => {
+      const image = cell.row.original.image;
+
+      return (
+        <>
+          <img
+            src={`${imageUrl}/${image}`}
+            alt="category image"
+            className="w-[50px] h-auto"
+          />
+        </>
+      );
+    },
   },
   {
     Header: "Action",

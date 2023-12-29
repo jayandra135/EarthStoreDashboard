@@ -55,7 +55,7 @@ export default function Dashboard({ children }) {
 
   return (
     <>
-      <div>
+      <div className="w-[100%] sm:w-full lg:w-full md:w-full">
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog
             as="div"
@@ -128,7 +128,7 @@ export default function Dashboard({ children }) {
                                   className={classNames(
                                     item.current
                                       ? "bg-gray-800 text-white cursor-pointer"
-                                      : "text-gray-400 hover:text-white hover:bg-gray-800",
+                                      : "text-gray-400 hover:text-white hover:bg-gray-800 ",
                                     "group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold cursor-pointer"
                                   )}
                                 >

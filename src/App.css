@@ -1,5 +1,19 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
+
+/* html,
+body {
+  overscroll-behavior-x: none;
+  overflow-x: clip;
+}
+
+@media screen and (min-width: 375px) {
+  html,
+  body {
+    overscroll-behavior-x: none;
+    overflow-x: clip;
+  }
+} */

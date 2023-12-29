@@ -5,12 +5,14 @@ import Table from "../../components/tables/Table";
 import { ToastContainer, toast } from "react-toastify";
 const Category = () => {
   const [allcategory, setAllCategory] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
 
   const getCategoryData = async () => {
     const response = await MasterServices.getAllCategory();
 
-    if (response.data.data.length > 0) {
+    if (response?.data) {
       setAllCategory(response?.data?.data);
+      setImageUrl(response?.data?.path);
     } else {
       toast.error(response?.data?.message);
     }
@@ -31,7 +33,7 @@ const Category = () => {
           </div>
           <div className="flex flex-col">
             <Table
-              columns={category_columns({ onDeleteOpen })}
+              columns={category_columns({ onDeleteOpen, imageUrl })}
               data={allcategory}
             />
           </div>
