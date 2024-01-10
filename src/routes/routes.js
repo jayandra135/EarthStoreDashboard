@@ -6,6 +6,7 @@ import User from "../pages/user/User";
 import Category from "../pages/category/Category";
 import SubCategory from "../pages/subcategory/SubCategory";
 import Product from "../pages/product/Product";
+import AddUser from "../pages/user/AddUser";
 const RoutesConfig = () => {
   return (
     <Router>
@@ -14,6 +15,7 @@ const RoutesConfig = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
+          <Route path="/adduser" element={<AddUser />} />
           <Route path="/category" element={<Category />} />
           <Route path="/subcategory" element={<SubCategory />} />
           <Route path="/product" element={<Product />} />

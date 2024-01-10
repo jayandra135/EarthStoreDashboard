@@ -49,7 +49,7 @@ export const user_columns = ({ onDeleteOpen }) => [
               size="default"
               variant="outlined"
             >
-              Edit<span className="sr-only">, </span>
+              Edit
             </button>
           </Link>
 
@@ -62,7 +62,6 @@ export const user_columns = ({ onDeleteOpen }) => [
               variant="outlined"
             >
               Delete
-              <span className="sr-only">, </span>
             </button>
           </span>
         </>
@@ -110,7 +109,7 @@ export const category_columns = ({ onDeleteOpen, imageUrl }) => [
               size="default"
               variant="outlined"
             >
-              Edit<span className="sr-only">, </span>
+              Edit
             </button>
           </Link>
           <span className="inline-flex px-2 ml-3 text-xs leading-5 text-red-600 bg-red-100 rounded-full">
@@ -122,7 +121,6 @@ export const category_columns = ({ onDeleteOpen, imageUrl }) => [
               variant="outlined"
             >
               Delete
-              <span className="sr-only">, </span>
             </button>
           </span>
         </>
@@ -173,7 +171,7 @@ export const subcategory_columns = ({ onDeleteOpen, imageUrl }) => [
               size="default"
               variant="outlined"
             >
-              Edit<span className="sr-only">, </span>
+              Edit
             </button>
           </Link>
           <span className="inline-flex px-2 ml-3 text-xs leading-5 text-red-600 bg-red-100 rounded-full">
@@ -185,7 +183,6 @@ export const subcategory_columns = ({ onDeleteOpen, imageUrl }) => [
               variant="outlined"
             >
               Delete
-              <span className="sr-only">, </span>
             </button>
           </span>
         </>
@@ -235,7 +232,7 @@ export const product_colums = ({ onDeleteOpen }) => [
               size="default"
               variant="outlined"
             >
-              Edit<span className="sr-only">, </span>
+              Edit
             </button>
           </Link>
           <span className="inline-flex px-2 ml-3 text-xs leading-5 text-red-600 bg-red-100 rounded-full">
@@ -247,7 +244,6 @@ export const product_colums = ({ onDeleteOpen }) => [
               variant="outlined"
             >
               Delete
-              <span className="sr-only">, </span>
             </button>
           </span>
         </>

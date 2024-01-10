@@ -18,4 +18,14 @@ export default {
     const response = await Api().get("product/get-allProducts");
     return response;
   },
+
+  async postUserData(body) {
+    const response = await Api().post("user/addUser", body);
+    return response;
+  },
+
+  async deleteUserApi(id) {
+    const response = await Api().delete("user/deleteUser/" + id);
+    return response;
+  },
 };

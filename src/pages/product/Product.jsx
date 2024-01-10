@@ -22,7 +22,7 @@ const Product = () => {
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col ">
           <div className="flex flex-col gap-y-2">
-            <h2 className="text-lg font-medium">Product</h2>
+            <h2 className="text-lg font-semibold">Product</h2>
             <p className="text-md font-normal text-gray-700">
               All list of all Products.
             </p>

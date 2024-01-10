@@ -16,13 +16,13 @@ const Table = ({ columns, data, table_id, printRef, zoom }) => {
           className={`mt-8  flex flex-col ${zoom ? zoom : ""}`}
         >
           <div className="my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="py-2 align-middle inline-block max-w-full sm:px-6 lg:px-8 ">
-              <div className="shadow overflow-hidden border border-gray-200 inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8 ">
+            <div className="py-2 align-middle inline-block min-w-full  ">
+              <div className="shadow overflow-hidden border border-gray-200 sm:rounded-lg">
                 <table
                   {...getTableProps()}
                   className="min-w-full divide-y divide-gray-200 text-center "
                 >
-                  <thead className="bg-gray-50">
+                  <thead className="bg-gray-100">
                     {headerGroups.map((headerGroup) => (
                       <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map((column) => (
