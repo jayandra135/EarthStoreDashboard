@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export const user_columns = ({ onDeleteOpen }) => [
+export const user_columns = ({ onDeleteOpen, onEditOpen }) => [
   {
     Header: "FirstName",
     accessor: "firstName",
@@ -41,7 +41,9 @@ export const user_columns = ({ onDeleteOpen }) => [
       return (
         <>
           <Link
-            // onClick={() => handleDrawer("edit", cellId, cell.row.original)}
+            onClick={() => {
+              onEditOpen(cellID);
+            }}
             className="inline-flex px-2 ml-3 text-xs leading-5 rounded-full text-cyan-600 bg-cyan-100"
           >
             <button

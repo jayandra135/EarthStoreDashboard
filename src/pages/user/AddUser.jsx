@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import { useFormik } from "formik";
 import { actions } from "react-table";
 import { userSchema } from "../../schema";
 import MasterServices from "../../ApiServices/MasterServices";
 import { toast } from "react-toastify";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 
 const AddUser = () => {
+  const { _id } = useParams();
+  const navigate = useNavigate();
+  const user = {
+    userid: _id,
+    type: "edit",
+  };
+
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -28,29 +36,68 @@ const AddUser = () => {
     },
   ];
 
+  const getSingleUserData = async () => {
+    if (user.userid) {
+      const response = await MasterServices.getSingleUser(user?.userid);
+      if (response.status === 200) {
+        setFormData({
+          firstName: response?.data?.data?.firstName,
+          lastName: response?.data?.data?.lastName,
+          email: response?.data?.data?.email,
+          password: response?.data?.data?.password,
+          gender: response?.data?.data?.gender,
+          contact: response?.data?.data?.contact,
+          dob: response?.data?.data?.dob,
+        });
+      }
+    }
+  };
+
   const { values, errors, touched, handleSubmit, handleBlur, handleChange } =
     useFormik({
       enableReinitialize: true,
       initialValues: formData,
-      validationSchema: userSchema,
+      validationSchema: user?.userid ? "" : userSchema,
       onSubmit: async (values, { resetForm }) => {
         resetForm({ values: initialValues });
-        const response = await MasterServices.postUserData(values);
+        if (user?.userid) {
+          const response = await MasterServices.updateUserData(
+            user.userid,
+            values
+          );
 
-        if (response.data.message === "Success") {
-          toast.success("Data submitted Successfully");
+          if (response?.data?.message === "updated") {
+            toast.success("Data update Successfully");
+            setTimeout(() => {
+              navigate("/user");
+            }, 0);
+          } else {
+            toast.error("something wrong happen");
+          }
         } else {
-          toast.error("something wrong happen");
+          const response = await MasterServices.postUserData(values);
+
+          if (response?.data?.message === "Success") {
+            toast.success("Data submitted Successfully");
+          } else {
+            toast.error("something wrong happen");
+          }
         }
       },
     });
+
+  useEffect(() => {
+    getSingleUserData();
+  }, []);
 
   return (
     <>
       <div className="px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="flex">
-            <h1 className="text-lg font-semibold">Add User</h1>
+            <h1 className="text-lg font-semibold">
+              {user.userid ? "Edit User" : "Add User"}
+            </h1>
           </div>
           <form className="flex mt-5" onSubmit={handleSubmit}>
             <div className="flex flex-col p-2 w-full gap-5">
@@ -61,7 +108,7 @@ const AddUser = () => {
                     name="firstName"
                     placeholder="Enter FirstName"
                     onChange={handleChange}
-                    value={values.firstName}
+                    value={values?.firstName}
                     onBlur={handleBlur}
                     className=" rounded-lg sm:text-sm shadow border border-gray-400 sm:max-w-sm w-full max-w-full"
                   />
@@ -77,7 +124,7 @@ const AddUser = () => {
                     name="lastName"
                     placeholder="Enter LastName"
                     onChange={handleChange}
-                    value={values.lastName}
+                    value={values?.lastName}
                     onBlur={handleBlur}
                     className=" rounded-lg sm:text-sm shadow border border-gray-400 sm:max-w-sm w-full max-w-full"
                   />
@@ -93,7 +140,7 @@ const AddUser = () => {
                     name="email"
                     placeholder="Enter Email"
                     onChange={handleChange}
-                    value={values.email}
+                    value={values?.email}
                     onBlur={handleBlur}
                     className=" rounded-lg sm:text-sm shadow border border-gray-400 sm:max-w-sm w-full max-w-full"
                   />
@@ -111,7 +158,7 @@ const AddUser = () => {
                     name="password"
                     placeholder="Enter Password"
                     onChange={handleChange}
-                    value={values.password}
+                    value={values?.password}
                     onBlur={handleBlur}
                     className=" rounded-lg sm:text-sm shadow border border-gray-400 sm:max-w-sm w-full max-w-full"
                   />
@@ -128,7 +175,7 @@ const AddUser = () => {
                     placeholder="Enter Phone Number"
                     onChange={handleChange}
                     value={
-                      values.contact !== null ? String(values.contact) : ""
+                      values?.contact !== null ? String(values.contact) : ""
                     }
                     onBlur={handleBlur}
                     className=" rounded-lg sm:text-sm shadow border border-gray-400 sm:max-w-sm w-full max-w-full"
@@ -171,7 +218,7 @@ const AddUser = () => {
                     placeholder="DOB"
                     onChange={handleChange}
                     name="dob"
-                    value={values.dob}
+                    value={values?.dob}
                     onBlur={handleBlur}
                     className=" rounded-lg sm:text-sm shadow border border-gray-400 sm:max-w-sm w-full max-w-full"
                   />
@@ -186,7 +233,7 @@ const AddUser = () => {
                     type="submit"
                     className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                   >
-                    Submit
+                    {user?.userid ? "Update" : "Submit"}
                   </button>
                 </div>
               </div>

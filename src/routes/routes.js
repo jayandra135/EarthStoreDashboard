@@ -15,7 +15,11 @@ const RoutesConfig = () => {
         <Route element={<ProtectedRoute />}>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />} />
-          <Route path="/adduser" element={<AddUser />} />
+          <Route path="/adduser/">
+            <Route index element={<AddUser />} />
+            <Route path=":_id" element={<AddUser />} />
+          </Route>
+
           <Route path="/category" element={<Category />} />
           <Route path="/subcategory" element={<SubCategory />} />
           <Route path="/product" element={<Product />} />

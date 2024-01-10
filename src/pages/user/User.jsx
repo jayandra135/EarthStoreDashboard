@@ -3,9 +3,10 @@ import { user_columns } from "../../components/tables/TableHeader";
 import Table from "../../components/tables/Table";
 import MasterServices from "../../ApiServices/MasterServices";
 import { ToastContainer, toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const User = () => {
   const [allUsers, setAllUsers] = useState([]);
+  const navigate = useNavigate();
 
   const getAllUserData = async () => {
     const response = await MasterServices.getAllUser();
@@ -20,12 +21,20 @@ const User = () => {
   }, []);
   const onDeleteOpen = async (id) => {
     const response = await MasterServices.deleteUserApi(id);
-    console.log("respse", response);
+
     if (response.status === 200) {
       toast.success("Deleted user successfully");
       getAllUserData();
     } else {
       toast.error("something happen");
+    }
+  };
+
+  const onEditOpen = (id) => {
+    if (id) {
+      setTimeout(() => {
+        navigate("/adduser/" + id);
+      }, 0);
     }
   };
   return (
@@ -50,7 +59,10 @@ const User = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <Table columns={user_columns({ onDeleteOpen })} data={allUsers} />
+            <Table
+              columns={user_columns({ onDeleteOpen, onEditOpen })}
+              data={allUsers}
+            />
           </div>
         </div>
       </div>
